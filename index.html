@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Advanced To-Do</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="app__header">
+      <h1 class="app__title">To-Do</h1>
+
+      <div class="header__controls">
+        <label class="sr-only" for="searchInput">Search tasks</label>
+        <input id="searchInput" class="input search" type="search" placeholder="Search tasks…"/>
+
+        <button id="themeToggle" class="btn" title="Toggle dark/light mode" aria-label="Toggle theme">
+          <span class="icon">🌓</span>
+        </button>
+
+        <button id="exportBtn" class="btn btn-ghost">Export</button>
+        <label class="btn btn-ghost import-btn">
+          Import
+          <input id="importInput" type="file" accept="application/json" hidden />
+        </label>
+      </div>
+    </header>
+
+    <section class="add">
+      <div class="add__row" id="addRow">
+        <label class="sr-only" for="taskInput">Task</label>
+        <input id="taskInput" class="input grow" type="text" placeholder="What needs to be done? (e.g., Submit report)"/>
+
+        <label class="sr-only" for="dueInput">Due date/time</label>
+        <input id="dueInput" class="input" type="datetime-local"/>
+
+        <label class="sr-only" for="prioritySelect">Priority</label>
+        <select id="prioritySelect" class="input">
+          <option value="medium" selected>Medium</option>
+          <option value="high">High</option>
+          <option value="low">Low</option>
+        </select>
+
+        <button id="addBtn" class="btn btn-primary">Add</button>
+      </div>
+      <p id="validationMsg" class="validation" role="alert" aria-live="polite"></p>
+    </section>
+
+    <section class="toolbar">
+      <div class="filters" role="tablist" aria-label="Filter tasks">
+        <button class="chip active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button class="chip" data-filter="active" role="tab" aria-selected="false">Active</button>
+        <button class="chip" data-filter="completed" role="tab" aria-selected="false">Completed</button>
+      </div>
+
+      <div class="sort">
+        <label for="sortSelect">Sort:</label>
+        <select id="sortSelect" class="input input--sm">
+          <option value="default" selected>Manual (drag & drop)</option>
+          <option value="priority">Priority (High → Low)</option>
+          <option value="due">Due date (Soonest first)</option>
+          <option value="alpha">Alphabetical (A → Z)</option>
+        </select>
+      </div>
+
+      <div class="counters" aria-live="polite">
+        <span><strong id="countTotal">0</strong> total</span>
+        <span><strong id="countActive">0</strong> active</span>
+        <span><strong id="countCompleted">0</strong> completed</span>
+      </div>
+
+      <button id="clearCompletedBtn" class="btn btn-danger">Clear Completed</button>
+    </section>
+
+    <main>
+      <ul id="taskList" class="list" aria-live="polite"></ul>
+    </main>
+
+    <footer class="app__footer">
+      <small>Made with ♥ — Vanilla JS</small>
+    </footer>
+  </div>
+
+  <template id="taskTemplate">
+    <li class="item" draggable="true">
+      <div class="item__left">
+        <input class="item__check" type="checkbox" aria-label="Mark complete"/>
+        <div class="item__content">
+          <span class="item__text"></span>
+          <div class="item__meta">
+            <span class="item__due"></span>
+            <span class="item__priority"></span>
+          </div>
+        </div>
+      </div>
+      <div class="item__actions">
+        <button class="btn btn-ghost btn-sm edit">Edit</button>
+        <button class="btn btn-ghost btn-sm delete">Delete</button>
+        <span class="drag-hint" title="Drag to reorder" aria-hidden="true">↕</span>
+      </div>
+    </li>
+  </template>
+
+  <script src="index.js"></script>
+</body>
+</html>
