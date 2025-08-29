@@ -8,7 +8,7 @@
       "type": "image/jpg"
     },
     {
-      "src": "logo-1.png",
+      "src": "logo-1.jpg",
       "sizes": "512x512",
       "type": "image/jpg"
     }
@@ -18,5 +18,6 @@
   "background_color": "#ffffff",
   "theme_color": "#000000"
 }
+
 
 
